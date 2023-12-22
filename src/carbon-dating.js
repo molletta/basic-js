@@ -12,14 +12,23 @@ const HALF_LIFE_PERIOD = 5730;
  * in case of incorrect sampleActivity
  *
  * @example
- * 
+ *
  * dateSample('1') => 22387
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(sampleActivity) {
+  if (typeof sampleActivity === 'string') {
+    let volume = Number (sampleActivity.trim());
+      if (volume > 0 && volume < 15 && Number.isFinite(volume)){
+        const logTwo = 0.693;
+        let decayRate = logTwo / HALF_LIFE_PERIOD;
+        let age = Math.log(MODERN_ACTIVITY / sampleActivity) / decayRate;
+        return Math.ceil(age);
+        }
+        else {return false}
+  }
+  else {return false}
 }
 
 module.exports = {
